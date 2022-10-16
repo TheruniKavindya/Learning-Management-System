@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface PrivilegeService {
 
-    public Privilege savePrivilege(Privilege privilege);
+    public Privilege savePrivilege( Privilege privilege);
 
     public List<Privilege> findPrivileges();
 
-    Boolean isPermissionsExists(Integer[] permissions);
+    Boolean isPermissionsExists( Integer[] permissions);
 }

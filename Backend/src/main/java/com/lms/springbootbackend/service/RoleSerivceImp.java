@@ -12,6 +12,7 @@ public class RoleSerivceImp implements RoleService{
     RoleRepository roleRepo;
 
     public Role saveRole(Role role){
+
         return roleRepo.save(role);
     }
 //    public Role findRole(int roleId){
@@ -22,7 +23,8 @@ public class RoleSerivceImp implements RoleService{
 //        return true;
 //    }
 //
-    public  Role findRole(int id){
+    public  Role  findRole(int id){
+
         return roleRepo.getReferenceById(id);
     }
 }
