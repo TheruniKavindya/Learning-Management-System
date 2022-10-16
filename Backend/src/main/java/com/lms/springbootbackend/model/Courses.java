@@ -1,18 +1,12 @@
 package com.lms.springbootbackend.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
-import java.time.Year;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
-public class Course {
+public class Courses {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
