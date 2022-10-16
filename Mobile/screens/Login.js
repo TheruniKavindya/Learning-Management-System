@@ -201,6 +201,7 @@ export default () => {
   );
 };
 
+//these are the styles of the Login Page
 const styles = StyleSheet.create({
   container: {
     flex: 1,
