@@ -14,6 +14,10 @@ import Animated, { measure } from "react-native-reanimated";
 import IconButton from "../../components/IconButton";
 import { useFonts } from "expo-font";
 import LineDivider from "../../components/LineDivider";
+import CourseChapters from "./CourseTabs/CourseChapters";
+import TextButton from "../../components/TextButton";
+import Button from "../../components/Button";
+import { Button as NativeButton } from "react-native";
 
 const course_details_tabs = constants.course_details_tabs.map(
   (course_details_tab) => ({
@@ -152,19 +156,49 @@ const CourseContent = ({ navigation, route }) => {
       return null;
     }
 
-    // const onTabPress = React.useCallback((tabIndex) => {
-    //   FlatListRef?.current?.scrollToOffSet({
-    //     offset: tabIndex * SIZES.width,
-    //   });
-    // });
-
     return (
       <Animated.View
         style={{
           height: 250,
           overflow: "hidden",
+          position: "relative",
         }}
       >
+        {/* Enrollment Button */}
+        <Button
+          label="Enroll"
+          contentContainerStyle={{
+            // flex: 1,
+            position: "absolute",
+            zIndex: 50,
+            paddingVertical: SIZES.radius,
+            paddingHorizontal: SIZES.padding,
+            borderRadius: SIZES.radius,
+            backgroundColor: COLORS.gray10,
+            width: SIZES.width,
+            height: 200,
+          }}
+          labelStyle={{ color: COLORS.gray50, ...FONTS.h3 }}
+        />
+
+        <TouchableOpacity>
+          <NativeButton
+            title="Hello"
+            style={{
+              position: "absolute",
+              zIndex: 50,
+              paddingVertical: SIZES.radius,
+              paddingHorizontal: SIZES.padding,
+              borderRadius: SIZES.radius,
+              backgroundColor: COLORS.gray10,
+              width: SIZES.width,
+              height: 200,
+              top: 0,
+              left: 0,
+            }}
+          />
+        </TouchableOpacity>
+
         {/* Background Image  */}
         <SharedElement
           id={`${sharedElementPrefix}-CourseCard-Bg-${category?.id}`}
@@ -280,7 +314,7 @@ const CourseContent = ({ navigation, route }) => {
                   width: SIZES.width,
                 }}
               >
-                {index == 0 && <Text>Chapters</Text>}
+                {index == 0 && <CourseChapters />}
                 {index == 1 && <Text>Notifications</Text>}
                 {index == 2 && <Text>Participants</Text>}
               </View>

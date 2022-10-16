@@ -53,7 +53,7 @@ const App = () => {
         />
 
         <StackTwo.Screen name="Login" component={Login} />
-        {/* <StackTwo.Screen name="Signup" component={Signup} /> */}
+        <StackTwo.Screen name="Signup" component={Signup} />
       </Stack.Navigator>
     </NavigationContainer>
   );
