@@ -1,17 +1,14 @@
 package com.lms.springbootbackend.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-import javax.persistence.*;
-import java.time.Year;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Entity
 @Data
+@Entity
 public class Course {
 
     @Id
@@ -31,5 +28,4 @@ public class Course {
     private String courseGrade;
 
     private String coursePrerequisite;
-
 }

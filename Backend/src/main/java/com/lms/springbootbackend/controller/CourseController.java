@@ -21,32 +21,34 @@ public class CourseController {
     private CourseRepository courseRepo;
 
     @GetMapping("/courses")
-    @Secured({"ROLE_SAVE_COURSE", "ROLE_VIEW_COURSE"})
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = new ArrayList<>();
+        List<Course> course = new ArrayList<>();
 
-        courseRepo.findAll().forEach(courses::add);
+        courseRepo.findAll().forEach(course::add);
 
 
-        if (courses.isEmpty())
+        if (course.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+            return new ResponseEntity<>(course, HttpStatus.OK);
     }
     //get by course title
     @GetMapping("/courses/{title}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<Course> getCourseByTitle(@PathVariable("title") String title) {
         Course course = courseRepo.findCourseByCourseTitleEquals(title);
 
         if (course == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(course, HttpStatus.OK);
+            return new ResponseEntity<>(course, HttpStatus.OK);
 
     }
 
     //get by grade
     @GetMapping("/courses_by_grade/{grade}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<List<Course>> getCoursesByGrade(@PathVariable("grade") String grade) {
         List<Course> courses = new ArrayList<>();
 
@@ -55,27 +57,30 @@ public class CourseController {
         if (courses.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+            return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
     //get course by course code
     @GetMapping("/courses_by_course_code/{course_code}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<Course> getCourseByCourseCode(@PathVariable("course_code") String course_code) {
         Course course = courseRepo.findCourseByCourseCode(course_code);
 
         if (course == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(course, HttpStatus.OK);
+            return new ResponseEntity<>(course, HttpStatus.OK);
 
     }
 
     //get by id
     @GetMapping("/courses_byId/{id}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<Course> getCourseById(@PathVariable("id") Long id) {
         Optional<Course> courseData = courseRepo.findById(id);
 
-        return courseData.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return courseData.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).
+                orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
@@ -90,6 +95,7 @@ public class CourseController {
 
     //Update course info
     @PutMapping("/courses/{course_code}")
+    @Secured("ROLE_EDIT_COURSE")
     public ResponseEntity<Course> updateCourseInfo(@PathVariable("course_code") String course_code, @RequestBody Course course) {
         Course c = courseRepo.findCourseByCourseCode(course_code);
         if (c == null)
@@ -118,12 +124,13 @@ public class CourseController {
 
     //Delete course
     @DeleteMapping("/courses/{course_code}")
+    @Secured("ROLE_DELETE_COURSE")
     public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("course_code") String course_code) {
         Course c = courseRepo.findCourseByCourseCode(course_code);
         if (c == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         courseRepo.delete(c);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

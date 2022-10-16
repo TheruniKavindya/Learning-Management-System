@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 @Service
-public class PrivilegeServiceImp implements PrivilegeService {
+public class  PrivilegeServiceImp implements PrivilegeService {
 
     @Autowired
     PrivilegeRepository privRepo;
@@ -17,18 +17,20 @@ public class PrivilegeServiceImp implements PrivilegeService {
     @Autowired
     private EntityManager entityManager;
 
-    public Privilege savePrivilege(Privilege privilege){
+    public  Privilege savePrivilege(Privilege privilege){
         return privRepo.save(privilege);
     }
 
-    public List<Privilege> findPrivileges(){
+    public  List<Privilege> findPrivileges(){
         return privRepo.findAll();
     }
 
-    public Boolean isPermissionsExists(Integer[] permissions){
+    public  Boolean isPermissionsExists(Integer[] permissions){
         Privilege privileges=null;
+
         for(int i=0; i<permissions.length; i++){
             privileges = entityManager.find(Privilege.class, permissions[i]);
+
             if(privileges==null){
                 return false;
             }

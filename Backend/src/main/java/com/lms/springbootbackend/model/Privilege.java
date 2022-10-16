@@ -1,11 +1,15 @@
 package com.lms.springbootbackend.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Privilege {
 
     @Id
@@ -17,10 +21,6 @@ public class Privilege {
 
     @Column(nullable = false)
     private Boolean status;
-
-    public Privilege(){
-
-    }
 
     public Privilege(String privilege_name){
         this.privilege_name=privilege_name;

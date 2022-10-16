@@ -36,21 +36,22 @@ public class RoleController {
     public ResponseEntity<Role> createRole(@RequestBody RoleDTO roleDTO){
         try{
             Role newRole = new Role(roleDTO.getRolename(), roleDTO.getStatus());
+
             if(priSev.isPermissionsExists(roleDTO.getRolePermissios())==true){
                 for(int i=0; i<roleDTO.getRolePermissios().length; i++){
                     newRole.addPrivilege(entityManager.find(Privilege.class, roleDTO.getRolePermissios()[i] ));
                 }
                 logger.info("Successfully saved a new role");
-                return new ResponseEntity<>(roleSev.saveRole(newRole), HttpStatus.CREATED);
+                    return new ResponseEntity<>(roleSev.saveRole(newRole), HttpStatus.CREATED);
             }else {
                 logger.error("Given privilege(s) not found");
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
         }
         catch(Exception e){
             e.printStackTrace();
             logger.error("Error occurred");
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
