@@ -21,7 +21,7 @@ public class CourseController {
     private CourseRepository courseRepo;
 
     @GetMapping("/courses")
-    @Secured({"ROLE_SAVE_COURSE", "ROLE_VIEW_COURSE"})
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<List<Course>> getAllCourses() {
         List<Course> courses = new ArrayList<>();
 
@@ -35,6 +35,7 @@ public class CourseController {
     }
     //get by course title
     @GetMapping("/courses/{title}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<Course> getCourseByTitle(@PathVariable("title") String title) {
         Course course = courseRepo.findCourseByCourseTitleEquals(title);
 
@@ -47,6 +48,7 @@ public class CourseController {
 
     //get by grade
     @GetMapping("/courses_by_grade/{grade}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<List<Course>> getCoursesByGrade(@PathVariable("grade") String grade) {
         List<Course> courses = new ArrayList<>();
 
@@ -60,6 +62,7 @@ public class CourseController {
 
     //get course by course code
     @GetMapping("/courses_by_course_code/{course_code}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<Course> getCourseByCourseCode(@PathVariable("course_code") String course_code) {
         Course course = courseRepo.findCourseByCourseCode(course_code);
 
@@ -72,6 +75,7 @@ public class CourseController {
 
     //get by id
     @GetMapping("/courses_byId/{id}")
+    @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<Course> getCourseById(@PathVariable("id") Long id) {
         Optional<Course> courseData = courseRepo.findById(id);
 
@@ -90,6 +94,7 @@ public class CourseController {
 
     //Update course info
     @PutMapping("/courses/{course_code}")
+    @Secured("ROLE_EDIT_COURSE")
     public ResponseEntity<Course> updateCourseInfo(@PathVariable("course_code") String course_code, @RequestBody Course course) {
         Course c = courseRepo.findCourseByCourseCode(course_code);
         if (c == null)
@@ -118,6 +123,7 @@ public class CourseController {
 
     //Delete course
     @DeleteMapping("/courses/{course_code}")
+    @Secured("ROLE_DELETE_COURSE")
     public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("course_code") String course_code) {
         Course c = courseRepo.findCourseByCourseCode(course_code);
         if (c == null)
