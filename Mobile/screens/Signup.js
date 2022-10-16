@@ -260,6 +260,7 @@ export default () => {
   );
 };
 
+//these are the styles of the Signup Page
 const styles = StyleSheet.create({
   container: {
     flex: 1,

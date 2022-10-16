@@ -23,15 +23,15 @@ public class CourseController {
     @GetMapping("/courses")
     @Secured("ROLE_VIEW_COURSE")
     public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = new ArrayList<>();
+        List<Course> course = new ArrayList<>();
 
-        courseRepo.findAll().forEach(courses::add);
+        courseRepo.findAll().forEach(course::add);
 
 
-        if (courses.isEmpty())
+        if (course.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+            return new ResponseEntity<>(course, HttpStatus.OK);
     }
     //get by course title
     @GetMapping("/courses/{title}")
@@ -42,7 +42,7 @@ public class CourseController {
         if (course == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(course, HttpStatus.OK);
+            return new ResponseEntity<>(course, HttpStatus.OK);
 
     }
 
@@ -57,7 +57,7 @@ public class CourseController {
         if (courses.isEmpty())
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(courses, HttpStatus.OK);
+            return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
     //get course by course code
@@ -69,7 +69,7 @@ public class CourseController {
         if (course == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-        return new ResponseEntity<>(course, HttpStatus.OK);
+            return new ResponseEntity<>(course, HttpStatus.OK);
 
     }
 
@@ -79,7 +79,8 @@ public class CourseController {
     public ResponseEntity<Course> getCourseById(@PathVariable("id") Long id) {
         Optional<Course> courseData = courseRepo.findById(id);
 
-        return courseData.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        return courseData.map(student -> new ResponseEntity<>(student, HttpStatus.OK)).
+                orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
 
@@ -130,6 +131,6 @@ public class CourseController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         courseRepo.delete(c);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
