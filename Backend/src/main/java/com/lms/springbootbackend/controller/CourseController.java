@@ -121,7 +121,8 @@ public class CourseController {
 
     //Delete course
     @DeleteMapping("/courses/{course_code}")
-    public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("course_code") String course_code) {
+    public ResponseEntity<HttpStatus> deleteCourse(@PathVariable("course_code")
+                                                       String course_code) {
         Courses c = courseRepo.findCourseByCourseCode(course_code);
         if (c == null)
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

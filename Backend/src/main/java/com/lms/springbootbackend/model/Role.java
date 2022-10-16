@@ -1,12 +1,15 @@
 package com.lms.springbootbackend.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Role {
 
@@ -21,12 +24,9 @@ public class Role {
     private boolean status;
 
     @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(name = "role_privilege", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "privilege_id"))
+    @JoinTable(name = "role_privilege", joinColumns = @JoinColumn(name = "role_id"),
+                inverseJoinColumns = @JoinColumn(name = "privilege_id"))
     private Set<Privilege> privileges = new HashSet<>();
-
-    public Role(){
-
-    }
 
     public Role(String role_name){
         this.role_name=role_name;

@@ -54,24 +54,24 @@ public class UserController {
                 // adding user role
                 newUser.addRole(entityManager.find(Role.class, userdetails.getRoleId()));
                 logger.info("Successfully registered a new user");
-                return new ResponseEntity<>(useSev.saveUser(newUser), HttpStatus.CREATED);
+                    return new ResponseEntity<>(useSev.saveUser(newUser), HttpStatus.CREATED);
             }
             else {
                 logger.error("user role not found");
-                return  new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+                    return  new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
         }
         catch (NumberFormatException e){
             logger.error("invalid value assignment");
-            return  new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
+                    return  new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE);
         }
         catch (Exception e){
             if(userSev.findUserByUsername(userdetails.getUsername())==true){
                 logger.error("Username is already taken");
-                return new ResponseEntity<>(null , HttpStatus.FOUND);
+                    return new ResponseEntity<>(null , HttpStatus.FOUND);
             }else{
                 logger.error("Registration was not successful");
-                return new ResponseEntity<>(null , HttpStatus.INTERNAL_SERVER_ERROR);
+                    return new ResponseEntity<>(null , HttpStatus.INTERNAL_SERVER_ERROR);
             }
             // e.printStackTrace();
         }

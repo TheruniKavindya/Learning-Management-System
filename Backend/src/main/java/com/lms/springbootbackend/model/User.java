@@ -1,6 +1,6 @@
 package com.lms.springbootbackend.model;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Data
+
+
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
 
     // MVC - Model, View , Controller
-    // m
-    //
-    //
-    //
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -32,9 +32,6 @@ public class User implements UserDetails {
 
     @Column(length = 255, nullable = false)
     private String password;
-
-    public User(){
-    }
 
     public User(String email, String username, String password){
         this.email=email;

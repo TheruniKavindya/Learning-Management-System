@@ -39,17 +39,17 @@ public class AuthController {
             String accessToken = jwtTokenUtil.generateAccessToken(user);
             AuthResponse response = new AuthResponse(user.getEmail(), accessToken);
             logger.error("Username is " + user.getUsername());
-            return ResponseEntity.ok(response);
+                return ResponseEntity.ok(response);
         }
         catch (BadCredentialsException e){
             //e.printStackTrace();
             logger.error("User not found");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         catch (Exception e){
             //e.printStackTrace();
             logger.error("Something went wrong");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

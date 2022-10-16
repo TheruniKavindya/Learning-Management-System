@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Courses, Long> {
+public interface CourseRepository extends  JpaRepository<Courses, Long> {
 
     Courses findCourseByCourseTitleEquals(String title);
     List<Courses> findAllByCreditHour(double credit_hour);

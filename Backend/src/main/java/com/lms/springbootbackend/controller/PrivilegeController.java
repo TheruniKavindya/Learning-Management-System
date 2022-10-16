@@ -25,11 +25,11 @@ public class PrivilegeController {
     public ResponseEntity<Privilege> createPrivilege(@RequestBody Privilege privilege){
         try{
             logger.info("Successfully saved a new privilege");
-            return new ResponseEntity<>(privSev.savePrivilege(privilege), HttpStatus.CREATED);
+                return new ResponseEntity<>(privSev.savePrivilege(privilege), HttpStatus.CREATED);
         }
         catch (Exception e){
             logger.error("Error occurred");
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

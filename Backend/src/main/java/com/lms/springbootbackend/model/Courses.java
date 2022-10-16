@@ -1,11 +1,14 @@
 package com.lms.springbootbackend.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Courses {
 
     @Id
